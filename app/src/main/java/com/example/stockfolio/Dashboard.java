@@ -1,30 +1,28 @@
 package com.example.stockfolio;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
-public class Dashboard extends AppCompatActivity implements View.OnClickListener {
-    private Button userProfile;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class Dashboard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        userProfile = (Button) findViewById(R.id.goToProfile);
-        userProfile.setOnClickListener(this);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        NavController navController = Navigation.findNavController(this,  R.id.fragment);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.goToProfile:
-                startActivity(new Intent(this, UserProfile.class));
-                break;
-        }
-    }
+
 }
